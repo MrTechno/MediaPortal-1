@@ -1378,7 +1378,6 @@ public class MediaPortalApp : D3D, IRender
     }
     return a;
   }
-  
 
   /// <summary>
   /// Message Pump
@@ -1392,7 +1391,7 @@ public class MediaPortalApp : D3D, IRender
       {
         case (int)ShellNotifications.WmShnotify:
           NotifyInfos info = new NotifyInfos((ShellNotifications.SHCNE)(int)msg.LParam);
-          
+
           if (Notifications.NotificationReceipt(msg.WParam, msg.LParam, ref info))
           {
             if (info.Notification == ShellNotifications.SHCNE.SHCNE_MEDIAINSERTED)
@@ -1451,7 +1450,7 @@ public class MediaPortalApp : D3D, IRender
           OnMoving(ref msg);
           PluginManager.WndProc(ref msg);
           break;
-        
+
         // verify window size in case it was not resized by the user
         case WM_SIZE:
           OnSize(ref msg);
@@ -1463,13 +1462,13 @@ public class MediaPortalApp : D3D, IRender
           OnSizing(ref msg);
           PluginManager.WndProc(ref msg);
           break;
-        
+
         // handle display changes
         case WM_DISPLAYCHANGE:
           OnDisplayChange(ref msg);
           PluginManager.WndProc(ref msg);
           break;
-        
+
         // handle device changes
         case WM_DEVICECHANGE:
           OnDeviceChange(ref msg);
@@ -1492,7 +1491,7 @@ public class MediaPortalApp : D3D, IRender
           Application.Exit();
           msg.Result = (IntPtr)0;
           break;
-        
+
         // handle activation and deactivation requests
         case WM_ACTIVATE:
           OnActivate(ref msg);
@@ -1570,7 +1569,6 @@ public class MediaPortalApp : D3D, IRender
     }
   }
 
-
   /// <summary>
   /// 
   /// </summary>
@@ -1624,7 +1622,6 @@ public class MediaPortalApp : D3D, IRender
     }
     return result;
   }
-
 
   /// <summary>
   /// Process WM_POWERBROADCAST messages
@@ -2252,7 +2249,7 @@ public class MediaPortalApp : D3D, IRender
     {
       case SIZE_RESTORED:
         Log.Debug("Main: WM_SIZE (SIZE_RESTORED: {0}x{1})", x, y);
-  
+
         // do not continue if form is not created yet
         if (!Created)
         {
@@ -2271,7 +2268,7 @@ public class MediaPortalApp : D3D, IRender
           Size maxClientSize = CalcMaxClientArea();
           if (x > maxClientSize.Width || y > maxClientSize.Height)
           {
-            Log.Debug("Main: Requested client size {0}x{1} is larger than the maximum aspect ratio safe client size of {2}x{3} - overriding", 
+            Log.Debug("Main: Requested client size {0}x{1} is larger than the maximum aspect ratio safe client size of {2}x{3} - overriding",
               x, y, maxClientSize.Width, maxClientSize.Height);
             ClientSize = maxClientSize;
             break;
@@ -2281,7 +2278,7 @@ public class MediaPortalApp : D3D, IRender
           var height = (int)((double)x * GUIGraphicsContext.SkinSize.Height / GUIGraphicsContext.SkinSize.Width);
           if (height != y && Windowed)
           {
-            Log.Info("Main: Overriding size from {0}x{1} to {2}x{3} (Skin resized to {4}x{5})", 
+            Log.Info("Main: Overriding size from {0}x{1} to {2}x{3} (Skin resized to {4}x{5})",
               x + border.Width, y + border.Height, x + border.Width, height + border.Height, x, height);
             ClientSize = new Size(x, height);
           }
@@ -2307,7 +2304,7 @@ public class MediaPortalApp : D3D, IRender
       case SIZE_MINIMIZED:
         Log.Debug("Main: WM_SIZE (SIZE_MINIMIZED: {0}x{1})", x, y);
         break;
-      
+
       case SIZE_MAXIMIZED:
         Log.Debug("Main: WM_SIZE (SIZE_MAXIMIZED: {0}x{1})", x, y);
         if (VisualizationBase.VisualizationWindow != null)
@@ -2316,11 +2313,11 @@ public class MediaPortalApp : D3D, IRender
           VisualizationBase.VisualizationWindow.Width = ClientRectangle.Height;
         }
         break;
-      
+
       case SIZE_MAXSHOW:
         Log.Debug("Main: WM_SIZE (SIZE_MAXSHOW: {0}x{1})", x, y);
         break;
-      
+
       case SIZE_MAXHIDE:
         Log.Debug("Main: WM_SIZE (SIZE_MAXHIDE: {0}x{1})", x, y);
         break;
@@ -2328,7 +2325,7 @@ public class MediaPortalApp : D3D, IRender
     msg.Result = (IntPtr)0;
   }
 
-  
+
   /// <summary>
   /// 
   /// </summary>
@@ -2468,7 +2465,7 @@ public class MediaPortalApp : D3D, IRender
 
     Log.Debug("Main: OnSuspend - stopping AutoPlay");
     AutoPlay.StopListening();
-      
+
     // un-mute volume in case we are suspending in away mode
     if (IsInAwayMode && VolumeHandler.Instance.IsMuted)
     {
@@ -2497,7 +2494,7 @@ public class MediaPortalApp : D3D, IRender
   }
 
   /// <summary>
-  /// This event is sent with the  PBT_APMRESUMEAUTOMATIC event if the system has resumed operation due to user activity.
+  /// This event is sent with the PBT_APMRESUMEAUTOMATIC event if the system has resumed operation due to user activity.
   /// </summary>
   private void OnResumeSuspend()
   {
@@ -2732,7 +2729,7 @@ public class MediaPortalApp : D3D, IRender
       {
         Log.Warn("Main: Could not register for power settings notification GUID_SESSION_USER_PRESENCE");
       }
-    } 
+    }
     else if (OSInfo.OSInfo.VistaOrLater())
     {
       _displayStatusHandle = RegisterPowerSettingNotification(Handle, ref GUID_MONITOR_POWER_ON, DEVICE_NOTIFY_WINDOW_HANDLE);
@@ -2853,7 +2850,7 @@ public class MediaPortalApp : D3D, IRender
         {
           currentmoduleid = Convert.ToString(GUIWindowManager.GetPreviousActiveWindow());
         }
-        
+
         if (!currentmodulefullscreen && currentmodulefullscreenstate == "True")
         {
           currentmodulefullscreen = true;
@@ -3005,7 +3002,7 @@ public class MediaPortalApp : D3D, IRender
     GUIWindowManager.Clear();
     GUIWaitCursor.Dispose();
     GUITextureManager.Dispose();
- 
+
     // Loading keymap.xml
     Log.Info("Startup: Load keymap.xml");
     UpdateSplashScreenMessage(GUILocalizeStrings.Get(65));
@@ -3063,7 +3060,7 @@ public class MediaPortalApp : D3D, IRender
     }
     PluginManager.LoadWindowPlugins();
     PluginManager.CheckExternalPlayersCompatibility();
-    
+
     // Initialize window manager
     UpdateSplashScreenMessage(GUILocalizeStrings.Get(71));
     Log.Info("Startup: Initialize Window Manager...");
@@ -3090,7 +3087,7 @@ public class MediaPortalApp : D3D, IRender
     {
       GUIWindowManager.ActivateWindow(GUIWindowManager.ActiveWindow);
     }
-   
+
     // setting D3D9 helper variables
     if (GUIGraphicsContext.DX9Device != null)
     {
@@ -3447,7 +3444,7 @@ public class MediaPortalApp : D3D, IRender
   #endregion
 
   #region FrameMove()
-  
+
   /// <summary>
   /// 
   /// </summary>
@@ -3572,7 +3569,7 @@ public class MediaPortalApp : D3D, IRender
           _lastContextMenuAction = DateTime.Now;
           return;
         }
-        
+
         if (_lastContextMenuAction != DateTime.MaxValue)
         {
           TimeSpan ts = _lastContextMenuAction - DateTime.Now;
@@ -4059,7 +4056,7 @@ public class MediaPortalApp : D3D, IRender
               }
             }
             break;
- 
+
           // fast rewind...
           case Action.ActionType.ACTION_REWIND:
             {
@@ -4174,7 +4171,7 @@ public class MediaPortalApp : D3D, IRender
   }
 
   #region keypress handlers
-  
+
   /// <summary>
   /// 
   /// </summary>
@@ -4266,7 +4263,6 @@ public class MediaPortalApp : D3D, IRender
   #endregion
 
   #region mouse event handlers
-  
 
   /// <summary>
   /// 
@@ -4760,7 +4756,7 @@ public class MediaPortalApp : D3D, IRender
   #endregion
 
   #region External process start / stop handling
-  
+
   /// <summary>
   /// 
   /// </summary>
@@ -4793,7 +4789,7 @@ public class MediaPortalApp : D3D, IRender
   }
 
   #endregion
-  
+
   #region helper funcs
 
   /// <summary>
@@ -4946,8 +4942,8 @@ public class MediaPortalApp : D3D, IRender
   /// <returns>A string containing the current time.</returns>
   protected string GetTime()
   {
-    return DateTime.Now.ToString(_useLongDateFormat 
-      ? Thread.CurrentThread.CurrentCulture.DateTimeFormat.LongTimePattern 
+    return DateTime.Now.ToString(_useLongDateFormat
+      ? Thread.CurrentThread.CurrentCulture.DateTimeFormat.LongTimePattern
       : Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortTimePattern);
   }
 
@@ -5252,5 +5248,4 @@ public class MediaPortalApp : D3D, IRender
   }
 
   #endregion
-
 }
