@@ -347,7 +347,7 @@ namespace MediaPortal.Configuration.Sections
       this.tabPageTVGuideSettings.Padding = new System.Windows.Forms.Padding(3);
       this.tabPageTVGuideSettings.Size = new System.Drawing.Size(464, 453);
       this.tabPageTVGuideSettings.TabIndex = 5;
-      this.tabPageTVGuideSettings.Text = "TV guide";
+      this.tabPageTVGuideSettings.Text = "TV/Radio guide";
       this.tabPageTVGuideSettings.UseVisualStyleBackColor = true;
       // 
       // tabControlTvGuideSettings
