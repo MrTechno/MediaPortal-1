@@ -127,9 +127,11 @@ public class MediaPortalApp : D3D, IRender
   private IntPtr                _displayStatusHandle;
   private IntPtr                _userPresenceHandle;
   private IntPtr                _awayModeHandle;
+  private IntPtr                _hWnd;
   private bool                  _resumedAutomatic;
   private bool                  _userActivity;
   private Timer                 _delayTimer;
+  private FormWindowState       _previousWindowState;
 
   // ReSharper disable InconsistentNaming
   private const int WM_SYSCOMMAND            = 0x0112; // http://msdn.microsoft.com/en-us/library/windows/desktop/ms646360(v=vs.85).aspx
@@ -1638,6 +1640,17 @@ public class MediaPortalApp : D3D, IRender
       {
         // The computer is about to enter a suspended state
         case (int)PBT_EVENT.PBT_APMSUSPEND:
+          // Save current MediaPortal Windows handle and check WindowsState
+          _previousWindowState = WindowState;
+          RestoreFromTray();
+          Process prc = Process.GetCurrentProcess();
+          Process.GetProcessesByName(prc.ProcessName);
+          Log.Debug("Main: MediaPortal WindowsHandle {0}", prc.MainWindowHandle);
+          if (prc.ProcessName == "MediaPortal")
+          {
+            _hWnd = prc.MainWindowHandle;
+          }
+
           // Reset timer and resume states
           if (_delayTimer != null)
           {
@@ -1818,10 +1831,9 @@ public class MediaPortalApp : D3D, IRender
 
     // Send PBT_APMRESUMEDELAYED message
     Log.Debug("Main: SendResumeDelayedMsg - sending PBT_APMRESUMEDELAYED message");
-    IntPtr hWnd = Form.ActiveForm.Handle;
-    if (hWnd != IntPtr.Zero)
+    if (_hWnd != IntPtr.Zero)
     {
-      PostMessage(hWnd, WM_POWERBROADCAST, new IntPtr((int)PBT_EVENT.PBT_APMRESUMEDELAYED), IntPtr.Zero);
+      PostMessage(_hWnd, WM_POWERBROADCAST, new IntPtr((int)PBT_EVENT.PBT_APMRESUMEDELAYED), IntPtr.Zero);
     }
   }
 
@@ -2548,6 +2560,27 @@ public class MediaPortalApp : D3D, IRender
 
     _suspended = false;
     _lastOnresume = DateTime.Now;
+
+    // Force Focus after resume done (really weird sequence)
+    if (_previousWindowState != FormWindowState.Minimized)
+    {
+      // Make MediaPortal window normal ( if minimized )
+      Win32API.ShowWindow(_hWnd, Win32API.ShowWindowFlags.ShowNormal);
+
+      // Make Mediaportal window focused
+      if (Win32API.SetForegroundWindow(_hWnd, true))
+      {
+        Log.Info("Main: OnResumeSuspend - Successfully switched focus.");
+      }
+
+      // Bring MP to front
+      BringToFront();
+    }
+    else
+    {
+      MinimizeToTray();
+    }
+
     Log.Info("Main: OnResumeSuspend - Done");
   }
 
