@@ -406,7 +406,7 @@ namespace MediaPortal.Configuration.Sections
       this.cbColoredGuide.Name = "cbColoredGuide";
       this.cbColoredGuide.Size = new System.Drawing.Size(247, 17);
       this.cbColoredGuide.TabIndex = 3;
-      this.cbColoredGuide.Text = "Enable guide coloring (set colors on Colors tab)";
+      this.cbColoredGuide.Text = "Enable TV guide coloring (set colors on Colors tab)";
       this.cbColoredGuide.UseVisualStyleBackColor = true;
       this.cbColoredGuide.CheckedChanged += new System.EventHandler(this.cbColoredGuide_CheckedChanged);
       // 
@@ -417,7 +417,7 @@ namespace MediaPortal.Configuration.Sections
       this.cbBorderHighlight.Name = "cbBorderHighlight";
       this.cbBorderHighlight.Size = new System.Drawing.Size(201, 17);
       this.cbBorderHighlight.TabIndex = 2;
-      this.cbBorderHighlight.Text = "Border highlight the selected program";
+      this.cbBorderHighlight.Text = "Border highlight the selected program in TV/Radio guide";
       this.cbBorderHighlight.UseVisualStyleBackColor = true;
       // 
       // cbGenreColorKey
