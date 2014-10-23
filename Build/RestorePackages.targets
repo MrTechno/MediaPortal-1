@@ -16,6 +16,6 @@
 
     <Message Text="Found the following 'packages.config'-files: @(PackagesConfigs->'%(FullPath)')"/>
 
-    <Exec Command='"$(NuGetExePath)" install "%(PackagesConfigs.FullPath) -ConfigFile $(ProjectRoot)\NuGet.config"'/>
+    <Exec Command='"$(NuGetExePath)" install "%(PackagesConfigs.FullPath)" -ConfigFile "$(ProjectRoot)\NuGet.config"'/>
   </Target>
 </Project>
