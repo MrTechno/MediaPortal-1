@@ -12,10 +12,10 @@
   </ItemGroup>
 
   <Target Name="CustomRestorePackages">
-    <DownloadFile DownloadAddress="https://nuget.org/nuget.exe" -ConfigFile $(ProjectRoot)\NuGet.config OutputFilename="$(NuGetExePath)" Condition="!Exists('$(NuGetExePath)')" />
+    <DownloadFile DownloadAddress="https://nuget.org/nuget.exe" OutputFilename="$(NuGetExePath)" Condition="!Exists('$(NuGetExePath)')" />
 
     <Message Text="Found the following 'packages.config'-files: @(PackagesConfigs->'%(FullPath)')"/>
 
-    <Exec Command='"$(NuGetExePath)" install "%(PackagesConfigs.FullPath)"'/>
+    <Exec Command='"$(NuGetExePath)" -ConfigFile $(ProjectRoot)\NuGet.config install "%(PackagesConfigs.FullPath)"'/>
   </Target>
 </Project>
