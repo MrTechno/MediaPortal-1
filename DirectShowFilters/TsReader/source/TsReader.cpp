@@ -206,6 +206,8 @@ void StopLogger()
 }
 
 
+static char logbuffer[2000]; 
+static wchar_t logbufferw[2000];
 void LogDebug(const char *fmt, ...) 
 {
   static CCritSec lock;
@@ -237,6 +239,19 @@ void LogDebug(const char *fmt, ...)
   {
     m_logQueue.push((string)msg);
   }
+};
+
+void LogDebug(const wchar_t *fmt, ...)
+{
+  va_list ap;
+  va_start(ap,fmt);
+
+  va_start(ap,fmt);
+  vswprintf(logbufferw, fmt, ap);
+  va_end(ap); 
+
+  WideCharToMultiByte(CP_ACP, 0, logbufferw, -1, logbuffer, sizeof(logbuffer)/sizeof(char), NULL, NULL);
+  LogDebug("%s", logbuffer);
 };
 
 //------------------------------------------------------------------------------------
