@@ -135,8 +135,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViXS", "Plugins\CustomDevic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compro", "Plugins\CustomDevices\Compro\Compro.csproj", "{31C51CBF-F4FA-466D-8D91-E629EDCD533A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TvPlugin", "..\TvPlugin\TvPlugin.csproj", "{1526A789-1DE2-4A8B-AA4B-5382A617C4F8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVLibrary.Integration.MP1", "TvLibrary.Integration.MP1\TVLibrary.Integration.MP1.csproj", "{D7EB01B3-396B-4E0C-85EA-EBAC4738F089}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TvLibrary.IntegrationProvider.Interfaces", "TvLibrary.IntegrationProvider.Interfaces\TvLibrary.IntegrationProvider.Interfaces.csproj", "{34BCC448-B298-463E-B3B1-C031EBF0B4DB}"
@@ -375,10 +373,6 @@ Global
 		{31C51CBF-F4FA-466D-8D91-E629EDCD533A}.Debug|x86.Build.0 = Debug|x86
 		{31C51CBF-F4FA-466D-8D91-E629EDCD533A}.Release|x86.ActiveCfg = Release|x86
 		{31C51CBF-F4FA-466D-8D91-E629EDCD533A}.Release|x86.Build.0 = Release|x86
-		{1526A789-1DE2-4A8B-AA4B-5382A617C4F8}.Debug|x86.ActiveCfg = Debug|x86
-		{1526A789-1DE2-4A8B-AA4B-5382A617C4F8}.Debug|x86.Build.0 = Debug|x86
-		{1526A789-1DE2-4A8B-AA4B-5382A617C4F8}.Release|x86.ActiveCfg = Release|x86
-		{1526A789-1DE2-4A8B-AA4B-5382A617C4F8}.Release|x86.Build.0 = Release|x86
 		{D7EB01B3-396B-4E0C-85EA-EBAC4738F089}.Debug|x86.ActiveCfg = Debug|x86
 		{D7EB01B3-396B-4E0C-85EA-EBAC4738F089}.Debug|x86.Build.0 = Debug|x86
 		{D7EB01B3-396B-4E0C-85EA-EBAC4738F089}.Release|x86.ActiveCfg = Release|x86
