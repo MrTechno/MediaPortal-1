@@ -100,7 +100,7 @@ namespace Mediaportal.TV.Server.SetupTV.Sections
         include |= ChannelIncludeRelationEnum.TuningDetails;
         include |= ChannelIncludeRelationEnum.GroupMaps;
         include |= ChannelIncludeRelationEnum.GroupMapsChannelGroup;
-        IList<Channel> channels = ServiceAgents.Instance.ChannelServiceAgent.GetAllChannelsByGroupIdAndMediaType(_channelGroup.IdGroup, _mediaType, include);
+        IList<Channel> channels = new List<Channel>(); // ServiceAgents.Instance.ChannelServiceAgent.GetAllChannelsByGroupIdAndMediaType(_channelGroup.IdGroup, _mediaType, include);
 
         foreach (var channel in channels)
         {
