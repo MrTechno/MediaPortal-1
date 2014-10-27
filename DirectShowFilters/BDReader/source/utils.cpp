@@ -66,6 +66,22 @@ void LogDebug(const char *fmt, ...)
   //::OutputDebugString(buf);
 };
 
+void LogDebug(const wchar_t *fmt, ...)
+{
+  char logbuffer[2000]; 
+  wchar_t logbufferw[2000];
+  
+  va_list ap;
+  va_start(ap,fmt);
+
+  va_start(ap,fmt);
+  vswprintf(logbufferw, fmt, ap);
+  va_end(ap); 
+
+  WideCharToMultiByte(CP_ACP, 0, logbufferw, -1, logbuffer, sizeof(logbuffer)/sizeof(char), NULL, NULL);
+  LogDebug("%s", logbuffer);
+};
+
 
 // http://blogs.msdn.com/b/stevejs/archive/2005/12/19/505815.aspx
 
